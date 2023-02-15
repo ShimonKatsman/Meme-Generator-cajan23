@@ -2,6 +2,8 @@
 
 'use strict';
 
+var gImg
+
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var gImgs = [{ id: 1, url: '1.jpg', keywords: ['funny', 'trump'] },
@@ -28,22 +30,34 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I sometimes eat Falafel',
-            size: 20,
+            txt: '',
+            size: 40,
             align: 'left',
-            color: 'red'
+            color: undefined,
+            rectStroke: 'white'
         }
     ]
 }
 
-function getImg(elImg) {
-    let url = elImg.src
-    let urlArr = url.split('/')
-    let jpg = urlArr[urlArr.length - 1]
+// function getImg(elImg) {
+//     let url = elImg.src
+//     let urlArr = url.split('/')
+//     let jpg = urlArr[urlArr.length - 1]
 
-    let img = gImgs.find(item => item.url === jpg)
+//     let img = gImgs.find(item => item.url === jpg)
 
-    return img
+//     return img
+// }
+function getImg() {
+    return gImg
+}
+
+function getImgs() {
+    return gImgs
+}
+
+function setImg(elImg) {
+    gImg = elImg
 }
 
 function updateMeme(elImg) {
@@ -69,3 +83,33 @@ function getMeme() {
     return gMeme
 }
 
+function setLineTxt(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+function setColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function changeFontSize(num) {
+    gMeme.lines[gMeme.selectedLineIdx].size += num
+}
+
+function getMemeValue(key) {
+    return gMeme.lines[gMeme.selectedLineIdx][key]
+}
+
+function addMemeLine() {
+    gMeme.lines[gMeme.selectedLineIdx + 1] = {
+        txt: '',
+        size: 40,
+        align: 'left',
+        color: undefined,
+        rectStroke: 'white'
+    }
+}
+
+function setLine() {
+    if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx = 1
+    else gMeme.selectedLineIdx = 0
+}

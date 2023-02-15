@@ -7,3 +7,5 @@
 /* SETUP: */
 @import url('setup/vars.css');
 
+/* COMPONENTS: */
+@import url('components/colorPicker.css');

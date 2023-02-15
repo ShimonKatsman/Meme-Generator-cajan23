@@ -2,18 +2,37 @@
 
 'use strict';
 
-function renderMeme(elImg) {
-    let meme = getMeme()
+let gImgData
 
-    drawImg(elImg)
-    drawText(meme.lines[meme.selectedLineIdx].txt, 30, 30)
+function renderMeme() {
+    let meme = getMeme()
+    drawMeme(meme)
+    // if (gImgData) pasteImg()
+    // else drawImg(getImg())
+
+    // drawRect(10, 10)
+    // drawText(meme.lines[meme.selectedLineIdx].txt, gTxtPos)
+    // console.log(gMeme);
 }
 
 function updateMemeText(txt) {
-    let meme = getMeme()
+    setLineTxt(txt)
 
-    meme.lines[meme.selectedLineIdx].txt = txt
-
-    drawText(meme.lines[meme.selectedLineIdx].txt, 30, 30)
+    renderMeme()
 }
 
+function addLine() {
+    addMemeLine()
+    // console.log('gMeme', gMeme)
+    drawRect(10, gElCanvas.height - 60)
+    // copyImg()
+}
+
+function switchLine() {
+    // copyImg()
+    // blurLine()
+    setLine()
+    // focusLine()
+    // setTxtPos()
+    renderMeme()
+}

@@ -26,13 +26,13 @@
         <div class="control-box">
             <input oninput="updateMemeText(this.value)" title="Enter text" class="text-line" type="text"
                 placeholder="Text line">
-            <button title="Line above">⬆</button>
+            <button on title="Line above">⬆</button>
             <button title="Line below">⬇</button>
-            <button title="Switch lines">🔃</button>
-            <button title="Add line">➕</button>
+            <button onclick="switchLine()" title="Switch lines">🔃</button>
+            <button onclick="addLine()" title="Add line">➕</button>
             <button title="Delete line">🚮</button>
-            <button title="Increase font">A+</button>
-            <button title="Decrease font">A-</button>
+            <button onclick="changeFontSize(5)" title="Increase font">A+</button>
+            <button onclick="changeFontSize(-5)" title="Decrease font">A-</button>
             <button title="Left align">⏪</button>
             <button title="Center align">↔</button>
             <button title="Right align">⏩</button>
@@ -40,7 +40,10 @@
                 <option value="IMPACT">IMPACT</option>
             </select>
             <button title="Toggle outline">🔲</button>
-            <button title="choose font color">🎨</button>
+            <div class="color-picker">
+                <button title="choose font color">🎨 <input type="color" onchange="setColor(this.value)">
+                </button>
+            </div>
             <button title="Save to site">SAVE</button>
             <button title="Upload to facebook">UPLOAD</button>
             <button title="Download meme">DOWNLOAD</button>
@@ -48,7 +51,7 @@
     </section>
 
     <section class="img-gallery">
-        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/1.jpg" alt="trump">
+        <!-- <img onclick="renderMeme(this)" src="img/meme-imgs (square)/1.jpg" alt="trump">
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/2.jpg" alt="puppies">
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/3.jpg" alt="sweet-dreams">
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/4.jpg" alt="cat">
@@ -65,7 +68,7 @@
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/15.jpg" alt="puff">
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/16.jpg" alt="star-trek">
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/17.jpg" alt="putin">
-        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/18.jpg" alt="toy-story">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/18.jpg" alt="toy-story"> -->
     </section>
 
     <footer class="main-footer">
@@ -73,6 +76,7 @@
         <p>coffeRights</p>
     </footer>
 
+    <script src="js/galleryController.js"></script>
     <script src="js/canvasService.js"></script>
     <script src="js/memeService.js"></script>
     <script src="js/memeController.js"></script>
