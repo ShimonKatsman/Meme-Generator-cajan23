@@ -1,6 +1,9 @@
 /*בס"ד*/
 
-header {
-    text-align: right;
-}
+/* BASICS: */
+@import url('basics/layout.css');
+@import url('basics/base.css');
+
+/* SETUP: */
+@import url('setup/vars.css');
 

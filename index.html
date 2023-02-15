@@ -9,22 +9,23 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
+<body onload="onInit()">
     <header>בס"ד</header>
 
     <section class="main-nav">
-        <button class="logo">LOGO</button>
-        <ul>
+        <a href="#" class="logo">LOGO</a>
+        <ul class="nav-list">
             <li><a href="#">Gallery</a></li>
-            <li><a href="#">Generator</a></li>
+            <li><a href="#">Editor</a></li>
             <li><a href="#">My memes</a></li>
         </ul>
     </section>
 
     <section class="meme-gen">
-        <canvas width="400" height="400"></canvas>
+        <canvas id="my-canvas" width="400" height="400"></canvas>
         <div class="control-box">
-            <input title="Enter text" class="text-line" type="text" placeholder="Text line">
+            <input oninput="updateMemeText(this.value)" title="Enter text" class="text-line" type="text"
+                placeholder="Text line">
             <button title="Line above">⬆</button>
             <button title="Line below">⬇</button>
             <button title="Switch lines">🔃</button>
@@ -47,31 +48,33 @@
     </section>
 
     <section class="img-gallery">
-        <img src="img/meme-imgs (square)/1.jpg" alt="trump">
-        <img src="img/meme-imgs (square)/2.jpg" alt="puppies">
-        <img src="img/meme-imgs (square)/3.jpg" alt="sweet-dreams">
-        <img src="img/meme-imgs (square)/4.jpg" alt="cat">
-        <img src="img/meme-imgs (square)/5.jpg" alt="success">
-        <img src="img/meme-imgs (square)/6.jpg" alt="aliens">
-        <img src="img/meme-imgs (square)/7.jpg" alt="baby-1">
-        <img src="img/meme-imgs (square)/8.jpg" alt="tell-me-more">
-        <img src="img/meme-imgs (square)/9.jpg" alt="baby-2">
-        <img src="img/meme-imgs (square)/10.jpg" alt="obama">
-        <img src="img/meme-imgs (square)/11.jpg" alt="hug">
-        <img src="img/meme-imgs (square)/12.jpg" alt="what-were-you-going-to-do">
-        <img src="img/meme-imgs (square)/13.jpg" alt="toast">
-        <img src="img/meme-imgs (square)/14.jpg" alt="red-or-blue">
-        <img src="img/meme-imgs (square)/15.jpg" alt="puff">
-        <img src="img/meme-imgs (square)/16.jpg" alt="star-trek">
-        <img src="img/meme-imgs (square)/17.jpg" alt="putin">
-        <img src="img/meme-imgs (square)/18.jpg" alt="toy-story">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/1.jpg" alt="trump">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/2.jpg" alt="puppies">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/3.jpg" alt="sweet-dreams">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/4.jpg" alt="cat">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/5.jpg" alt="success">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/6.jpg" alt="aliens">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/7.jpg" alt="baby-1">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/8.jpg" alt="tell-me-more">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/9.jpg" alt="baby-2">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/10.jpg" alt="obama">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/11.jpg" alt="hug">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/12.jpg" alt="what-would-you-do">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/13.jpg" alt="toast">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/14.jpg" alt="red-or-blue">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/15.jpg" alt="puff">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/16.jpg" alt="star-trek">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/17.jpg" alt="putin">
+        <img onclick="renderMeme(this)" src="img/meme-imgs (square)/18.jpg" alt="toy-story">
     </section>
 
     <footer class="main-footer">
-        <button class="logo">LOGO</button>
+        <a href="#" class="logo">LOGO</a>
         <p>coffeRights</p>
     </footer>
 
+    <script src="js/canvasService.js"></script>
+    <script src="js/memeService.js"></script>
     <script src="js/memeController.js"></script>
     <script src="js/main.js"></script>
 </body>
