@@ -26,27 +26,36 @@
         <div class="control-box">
             <input oninput="updateMemeText(this.value)" title="Enter text" class="text-line" type="text"
                 placeholder="Text line">
-            <button on title="Line above">⬆</button>
-            <button title="Line below">⬇</button>
-            <button onclick="switchLine()" title="Switch lines">🔃</button>
-            <button onclick="addLine()" title="Add line">➕</button>
-            <button title="Delete line">🚮</button>
-            <button onclick="changeFontSize(5)" title="Increase font">A+</button>
-            <button onclick="changeFontSize(-5)" title="Decrease font">A-</button>
-            <button title="Left align">⏪</button>
-            <button title="Center align">↔</button>
-            <button title="Right align">⏩</button>
-            <select title="Choose font" name="fonts">
-                <option value="IMPACT">IMPACT</option>
-            </select>
-            <button title="Toggle outline">🔲</button>
-            <div class="color-picker">
-                <button title="choose font color">🎨 <input type="color" onchange="setColor(this.value)">
-                </button>
+            <div class="line-control">
+                <button onclick="changeHeight(-5)" title="Raise line">⬆</button>
+                <button onclick="changeHeight(5)" title="Lower line">⬇</button>
+                <button onclick="switchLine()" title="Switch lines">🔃</button>
+                <button onclick="addLine()" title="Add line">➕</button>
+                <button onclick="deleteLine()" title="Delete line">🚮</button>
             </div>
-            <button title="Save to site">SAVE</button>
-            <button title="Upload to facebook">UPLOAD</button>
-            <button title="Download meme">DOWNLOAD</button>
+            <div class="text-control">
+                <button onclick="changeFontSize(5)" title="Increase font">A+</button>
+                <button onclick="changeFontSize(-5)" title="Decrease font">A-</button>
+                <button onclick="setAlign('left')" title="Left align">⏪</button>
+                <button onclick="setAlign('center')" title="Center align">↔</button>
+                <button onclick="setAlign('right')" title="Right align">⏩</button>
+                <br>
+                <select onchange="setFont(this.value)" title="Choose font" name="fonts">
+                    <option value="Impact">IMPACT</option>
+                    <option value="cursive">CURSIVE</option>
+                    <option value="Arial">ARIAL</option>
+                </select>
+                <button onclick="toggleStroke()" title="Toggle outline">🔲</button>
+                <div class="color-picker">
+                    <button title="choose font color">🎨 <input type="color" oninput="setColor(this.value)">
+                    </button>
+                </div>
+            </div>
+            <button onclick="onSave()" title="Save to site">SAVE</button>
+            <button onclick="onUploadImg()" title="Upload to facebook">SHARE</button>
+            <a onclick="onDownload(this)" download="my-meme.jpg" href="">
+                <button title="Download meme">DOWNLOAD</button>
+            </a>
         </div>
     </section>
 
@@ -71,11 +80,14 @@
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/18.jpg" alt="toy-story"> -->
     </section>
 
+    <section class="my-memes"></section>
+
     <footer class="main-footer">
         <a href="#" class="logo">LOGO</a>
         <p>coffeRights</p>
     </footer>
 
+    <script src="js/storageService.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/canvasService.js"></script>
     <script src="js/memeService.js"></script>

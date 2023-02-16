@@ -2,14 +2,80 @@
 
 'use strict';
 
-console.log('hi');
+var gElCanvas
+var gCtx
+let imgCounter = 0
 
-let gElCanvas
-let gCtx
+let gElMemeCanvasArr = []
+let gCtxMemeArr = []
 
 function onInit() {
     gElCanvas = document.querySelector('#my-canvas')
     gCtx = gElCanvas.getContext('2d')
 
     renderGallery()
+}
+
+function onDownload(elLink) {
+    let meme = getMeme()
+    drawMeme(meme, 'rgba(255, 255, 255, 0)')
+    downloadImg(elLink)
+}
+
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+function onUploadImg() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
+
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log(encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+        if (XHR.readyState !== XMLHttpRequest.DONE) return
+        if (XHR.status !== 200) return console.error('Error uploading image')
+        const { responseText: url } = XHR
+        console.log('Got back live url:', url)
+        onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
+}
+
+function onSave() {
+    // const imgContent = gElCanvas.toDataURL('image/jpeg')
+
+    // document.querySelector('.my-memes').innerHTML += `<img src="${imgContent}"/>`
+}
+
+function onSave() {
+    let meme = getMeme()
+    saveToStorage(`meme-${imgCounter}`, meme)
+
+    document.querySelector('.my-memes').innerHTML += `<canvas class="meme-${imgCounter}" width="400" height="400"></canvas>`
+
+    gElMemeCanvasArr[imgCounter] = document.querySelector(`.meme-${imgCounter}`)
+    gCtxMemeArr[imgCounter] = gElMemeCanvasArr[imgCounter].getContext('2d')
+
+    for (var i = 0; i <= imgCounter; i++) {
+        let img = loadFromStorage(`meme-${i}`)
+        drawMeme(img, gCtxMemeArr[i], gElImgs[meme.selectedImgId])
+    }
+
+    imgCounter++
 }

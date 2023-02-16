@@ -9,3 +9,6 @@
 
 /* COMPONENTS: */
 @import url('components/colorPicker.css');
+@import url('components/mainNav.css');
+@import url('components/canvas.css');
+@import url('components/footer.css');

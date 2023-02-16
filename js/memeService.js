@@ -26,7 +26,7 @@ var gImgs = [{ id: 1, url: '1.jpg', keywords: ['funny', 'trump'] },
 { id: 18, url: '18.jpg', keywords: ['funny', 'toys'] }]
 
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: NaN,
     selectedLineIdx: 0,
     lines: [
         {
@@ -34,7 +34,8 @@ var gMeme = {
             size: 40,
             align: 'left',
             color: undefined,
-            rectStroke: 'white'
+            rectStroke: 'white',
+            font: 'impact'
         }
     ]
 }
@@ -60,10 +61,18 @@ function setImg(elImg) {
     gImg = elImg
 }
 
+// function setImg(elImg) {
+//     gMeme.selectedImgId = +elImg.dataset.num
+
+
+//     gImg = gImgs.find(item => item.id === gMeme.selectedImgId)
+//     console.log('gImg', gImg)
+// }
+
 function updateMeme(elImg) {
     let img = getImg(elImg)
 
-    gMeme.selectedImgId = img.id
+    gMeme.selectedImgId = +elImg.dataset.num
 
     // return {
     //     selectedImgId: img.id,
@@ -89,10 +98,12 @@ function setLineTxt(txt) {
 
 function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
+    renderMeme()
 }
 
 function changeFontSize(num) {
     gMeme.lines[gMeme.selectedLineIdx].size += num
+    renderMeme()
 }
 
 function getMemeValue(key) {
@@ -100,16 +111,45 @@ function getMemeValue(key) {
 }
 
 function addMemeLine() {
-    gMeme.lines[gMeme.selectedLineIdx + 1] = {
+    gMeme.lines[gMeme.lines.length] = {
         txt: '',
         size: 40,
         align: 'left',
         color: undefined,
-        rectStroke: 'white'
+        rectStroke: 'white',
+        font: 'impact'
     }
 }
 
 function setLine() {
-    if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx = 1
-    else gMeme.selectedLineIdx = 0
+
+    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'yellow') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'white'
+
+    gMeme.selectedLineIdx += 1
+
+    if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+
+    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke == 'rgba(255, 255, 255, 0)') {
+        gMeme.selectedLineIdx = gMeme.selectedLineIdx === gMeme.lines.length - 1 ? 0 : gMeme.selectedLineIdx + 1
+        setLine()
+    }
+
+    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'white') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'yellow'
+}
+// else {
+//     gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'white'
+//     gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'yellow'
+// }
+
+
+function deleteMemeLine() {
+    gMeme.lines[gMeme.selectedLineIdx].txt = ''
+    gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'rgba(255, 255, 255, 0)'
+
+    setLine()
+}
+
+function setFont(font) {
+    gMeme.lines[gMeme.selectedLineIdx].font = font
+    renderMeme()
 }

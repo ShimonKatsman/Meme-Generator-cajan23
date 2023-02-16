@@ -1,6 +1,24 @@
 /* בס"ד */
 
+* {
+    margin-block-end: 10px;
+}
+
+img {
+    width: 100px;
+    margin-inline: 5px;
+}
+
 .main-nav,
 footer {
     background-color: var(--clr0);
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+li {
+    list-style: none;
 }

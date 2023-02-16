@@ -2,6 +2,8 @@
 
 'use strict';
 
+var gElImgs = []
+
 function renderGallery() {
     let gallery = document.querySelector('.img-gallery')
 
@@ -9,16 +11,17 @@ function renderGallery() {
     let strHtml = ''
 
     for (let index = 0; index < imgs.length; index++) {
-        strHtml += `<img onclick="onImgSelect(this)" src="img/meme-imgs (square)/${imgs[index].url}">`
+        let str = `<img data-num="${index + 1}" onclick="onImgSelect(this)" src="img/meme-imgs (square)/${imgs[index].url}">`
+
+        gElImgs[index] = str
+        strHtml += str
     }
 
     gallery.innerHTML = strHtml
 }
 
 function onImgSelect(elImg) {
-    if (gImgData) gImgData = undefined
-
+    updateMeme(elImg)
     setImg(elImg)
-
     renderMeme()
 }

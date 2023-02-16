@@ -1,5 +1,9 @@
 /*בס"ד*/
 
+.color-picker {
+    display: inline-block;
+}
+
 .color-picker button {
     position: relative;
     box-sizing: border-box;
