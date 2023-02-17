@@ -18,7 +18,7 @@ function onInit() {
 
 function onDownload(elLink) {
     let meme = getMeme()
-    drawMeme(meme, 'rgba(255, 255, 255, 0)')
+    drawMeme(meme, gCtx, getImg(), 'rgba(255, 255, 255, 0)')
     downloadImg(elLink)
 }
 
@@ -58,24 +58,45 @@ function doUploadImg(imgDataUrl, onSuccess) {
 }
 
 function onSave() {
-    // const imgContent = gElCanvas.toDataURL('image/jpeg')
-
-    // document.querySelector('.my-memes').innerHTML += `<img src="${imgContent}"/>`
-}
-
-function onSave() {
     let meme = getMeme()
-    saveToStorage(`meme-${imgCounter}`, meme)
+    drawMeme(meme, gCtx, getImg(), 'rgba(255, 255, 255, 0)')
 
-    document.querySelector('.my-memes').innerHTML += `<canvas class="meme-${imgCounter}" width="400" height="400"></canvas>`
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
 
-    gElMemeCanvasArr[imgCounter] = document.querySelector(`.meme-${imgCounter}`)
-    gCtxMemeArr[imgCounter] = gElMemeCanvasArr[imgCounter].getContext('2d')
-
-    for (var i = 0; i <= imgCounter; i++) {
-        let img = loadFromStorage(`meme-${i}`)
-        drawMeme(img, gCtxMemeArr[i], gElImgs[meme.selectedImgId])
-    }
-
-    imgCounter++
+    document.querySelector('.my-memes').innerHTML += `<img onclick="onImgSelect(this)" src="${imgContent}" width ="100" height = "100"/>`
 }
+
+// function onSave() {
+//     // let meme = getMeme()
+//     // saveToStorage(`meme-${imgCounter}`, meme)
+
+//     document.querySelector('.my-memes').innerHTML += `<canvas class="meme-${imgCounter}" width="400" height="400"></canvas>`
+
+//     gElMemeCanvasArr[imgCounter] = document.querySelector(`.meme-${imgCounter}`)
+//     gCtxMemeArr[imgCounter] = gElMemeCanvasArr[imgCounter].getContext('2d')
+
+//     // for (var i = 0; i <= imgCounter; i++) {
+//     // let img = loadFromStorage(`meme-${i}`)
+//     let img = gCtx.createImageData(0, 0, gElCanvas.width, gElCanvas.height)
+//     // drawMeme(img, gCtxMemeArr[i], gElImgs[meme.selectedImgId])
+//     gCtxMemeArr[imgCounter].putImageData(img, 0, 0)
+
+//     imgCounter++
+// }
+// }
+// function onSave() {
+//     let meme = getMeme()
+//     saveToStorage(`meme-${imgCounter}`, meme)
+
+//     document.querySelector('.my-memes').innerHTML += `<canvas class="meme-${imgCounter}" width="400" height="400"></canvas>`
+
+//     gElMemeCanvasArr[imgCounter] = document.querySelector(`.meme-${imgCounter}`)
+//     gCtxMemeArr[imgCounter] = gElMemeCanvasArr[imgCounter].getContext('2d')
+
+//     for (var i = 0; i <= imgCounter; i++) {
+//         let img = loadFromStorage(`meme-${i}`)
+//         drawMeme(img, gCtxMemeArr[i], gElImgs[meme.selectedImgId])
+//     }
+
+//     imgCounter++
+// }
