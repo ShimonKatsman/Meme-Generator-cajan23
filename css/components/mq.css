@@ -7,5 +7,14 @@
 
     img {
         width: 20vw;
+        height: auto;
+    }
+
+    button {
+        width: -webkit-fill-available;
+    }
+
+    .color-picker button {
+        width: 12em;
     }
 }
