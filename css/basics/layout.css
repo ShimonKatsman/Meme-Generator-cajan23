@@ -26,6 +26,25 @@ header {
     display: grid;
 }
 
+.line-control {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-prop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-style {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-style>* {
+    height: 100%;
+}
+
 .img-gallery {
     display: inline-block;
     text-align: center;
@@ -35,4 +54,8 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.hide {
+    display: none;
 }

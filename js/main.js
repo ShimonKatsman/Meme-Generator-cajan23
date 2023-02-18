@@ -61,10 +61,47 @@ function onSave() {
     let meme = getMeme()
     drawMeme(meme, gCtx, getImg(), 'rgba(255, 255, 255, 0)')
 
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    saveToStorage(`meme-${imgCounter}`, meme)
 
-    document.querySelector('.my-memes').innerHTML += `<img onclick="onImgSelect(this)" src="${imgContent}" width ="100" height = "100"/>`
+    let imgContent = gElCanvas.toDataURL('image/jpeg')
+
+    document.querySelector('.my-memes').innerHTML += `<img data-meme="meme-${imgCounter}"  onclick="onMemeSelect(this)" src="${imgContent}" width ="100" height = "100"/>`
+
+    imgCounter++
+
+    onMyMemes()
 }
+
+function onMemeSelect(el) {
+    let data = el.dataset.meme
+
+    let meme = loadFromStorage(`${data}`)
+
+    let img = document.querySelector(`[data-num="${meme.selectedImgId}"]`)
+
+    drawMeme(meme, gCtx, img)
+
+    onEditor()
+}
+
+function onGallery() {
+    document.querySelector('.img-gallery').classList.remove('hide')
+    document.querySelector('.meme-gen').classList.add('hide')
+    document.querySelector('.my-memes').classList.add('hide')
+}
+
+function onEditor() {
+    document.querySelector('.img-gallery').classList.add('hide')
+    document.querySelector('.meme-gen').classList.remove('hide')
+    document.querySelector('.my-memes').classList.add('hide')
+}
+
+function onMyMemes() {
+    document.querySelector('.img-gallery').classList.add('hide')
+    document.querySelector('.meme-gen').classList.add('hide')
+    document.querySelector('.my-memes').classList.remove('hide')
+}
+
 
 // function onSave() {
 //     // let meme = getMeme()

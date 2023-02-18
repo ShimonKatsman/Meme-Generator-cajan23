@@ -13,15 +13,15 @@
     <header>בס"ד</header>
 
     <section class="main-nav">
-        <a href="#" class="logo">LOGO</a>
+        <a onclick="onGallery()" href="#" class="logo">LOGO</a>
         <ul class="nav-list">
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Editor</a></li>
-            <li><a href="#">My memes</a></li>
+            <li><a onclick="onGallery()" href="#">Gallery</a></li>
+            <li><a onclick="onEditor()" href="#">Editor</a></li>
+            <li><a onclick="onMyMemes()" href="#">My memes</a></li>
         </ul>
     </section>
 
-    <section class="meme-gen">
+    <section class="meme-gen hide">
         <canvas id="my-canvas" width="400" height="400"></canvas>
         <div class="control-box">
             <input oninput="updateMemeText(this.value)" title="Enter text" class="text-line" type="text"
@@ -34,27 +34,31 @@
                 <button onclick="deleteLine()" title="Delete line">🚮</button>
             </div>
             <div class="text-control">
-                <button onclick="changeFontSize(5)" title="Increase font">A+</button>
-                <button onclick="changeFontSize(-5)" title="Decrease font">A-</button>
-                <button onclick="setAlign('left')" title="Left align">⏪</button>
-                <button onclick="setAlign('center')" title="Center align">↔</button>
-                <button onclick="setAlign('right')" title="Right align">⏩</button>
-                <br>
-                <select onchange="setFont(this.value)" title="Choose font" name="fonts">
-                    <option value="Impact">IMPACT</option>
-                    <option value="cursive">CURSIVE</option>
-                    <option value="Arial">ARIAL</option>
-                </select>
-                <button onclick="toggleStroke()" title="Toggle outline">🔲</button>
-                <div class="color-picker">
-                    <button title="choose font color">🎨 <input type="color" oninput="setColor(this.value)">
-                    </button>
+                <div class="text-prop">
+                    <button onclick="changeFontSize(5)" title="Increase font">A+</button>
+                    <button onclick="changeFontSize(-5)" title="Decrease font">A-</button>
+                    <button onclick="setAlign('left')" title="Left align">⏪</button>
+                    <button onclick="setAlign('center')" title="Center align">↔</button>
+                    <button onclick="setAlign('right')" title="Right align">⏩</button>
+                </div>
+                <!-- <br> -->
+                <div class="text-style">
+                    <select onchange="setFont(this.value)" title="Choose font" name="fonts">
+                        <option value="Impact">IMPACT</option>
+                        <option value="cursive">CURSIVE</option>
+                        <option value="Arial">ARIAL</option>
+                    </select>
+                    <button onclick="toggleStroke()" title="Toggle outline">🔲</button>
+                    <div class="color-picker">
+                        <button title="choose font color">🎨 <input type="color" oninput="setColor(this.value)">
+                        </button>
+                    </div>
                 </div>
             </div>
             <button onclick="onSave()" title="Save to site">SAVE</button>
             <button onclick="onUploadImg()" title="Upload to facebook">SHARE</button>
             <a onclick="onDownload(this)" download="my-meme.jpg" href="">
-                <button title="Download meme">DOWNLOAD</button>
+                <button class="download" title="Download meme">DOWNLOAD</button>
             </a>
         </div>
     </section>
@@ -80,10 +84,10 @@
         <img onclick="renderMeme(this)" src="img/meme-imgs (square)/18.jpg" alt="toy-story"> -->
     </section>
 
-    <section class="my-memes"></section>
+    <section class="my-memes hide"></section>
 
     <footer class="main-footer">
-        <a href="#" class="logo">LOGO</a>
+        <a onclick="onGallery()" href="#" class="logo">LOGO</a>
         <p>coffeRights</p>
     </footer>
 

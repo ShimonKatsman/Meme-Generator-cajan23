@@ -24,4 +24,5 @@ function onImgSelect(elImg) {
     updateMeme(elImg)
     setImg(elImg)
     renderMeme()
+    onEditor()
 }

@@ -49,6 +49,7 @@ var gMeme = {
 
 //     return img
 // }
+
 function getImg() {
     return gImg
 }
@@ -70,22 +71,19 @@ function setImg(elImg) {
 // }
 
 function updateMeme(elImg) {
-    let img = getImg(elImg)
-
     gMeme.selectedImgId = +elImg.dataset.num
+    gMeme.selectedLineIdx = 0
 
-    // return {
-    //     selectedImgId: img.id,
-    //     selectedLineIdx: 0,
-    //     lines: [
-    //         {
-    //             txt: 'I sometimes eat Falafel',
-    //             size: 20,
-    //             align: 'left',
-    //             color: 'red'
-    //         }
-    //     ]
-    // }
+    gMeme.lines.splice(1)
+
+    gMeme.lines[0] = {
+        txt: '',
+        size: 40,
+        align: 'left',
+        color: undefined,
+        rectStroke: 'white',
+        font: 'impact'
+    }
 }
 
 function getMeme() {
