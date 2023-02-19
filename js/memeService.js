@@ -123,22 +123,23 @@ function addMemeLine() {
 }
 
 function setLine() {
-    
     if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'yellow') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'white'
-    
+
     gMeme.selectedLineIdx += 1
-    
-    if (gMeme.lines[gMeme.selectedLineIdx].isDeleted) gMeme.selectedLineIdx += 1
-    
+
     if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
 
+    if (gMeme.lines[gMeme.selectedLineIdx].isDeleted) gMeme.selectedLineIdx += 1
+
+    if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+
+    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'white') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'yellow'
 
     // if (gMeme.lines[gMeme.selectedLineIdx].rectStroke == 'rgba(255, 255, 255, 0)') {
     //     gMeme.selectedLineIdx = gMeme.selectedLineIdx === gMeme.lines.length - 1 ? 0 : gMeme.selectedLineIdx + 1
     //     // setLine()
     // }
 
-    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'white') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'yellow'
 }
 // else {
 //     gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'white'
