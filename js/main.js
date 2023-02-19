@@ -79,6 +79,9 @@ function onMemeSelect(el) {
 
     let img = document.querySelector(`[data-num="${meme.selectedImgId}"]`)
 
+    setMeme(meme)
+    setImg(img)
+
     drawMeme(meme, gCtx, img)
 
     onEditor()

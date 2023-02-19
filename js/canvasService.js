@@ -25,21 +25,21 @@ function drawImg(elImg, gCtx = gCtx) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function drawRect(x, y, color, gCtx = gCtx) {
+function drawRect(x, y, color, line, gCtx = gCtx) {
     gCtx.beginPath()
-    gCtx.rect(x, y, 380, getMemeValue('size') + 10)
+    gCtx.rect(x, y, 380, getMemeValue('size', line) + 10)
     gCtx.strokeStyle = color
     gCtx.stroke()
     // gCtx.fillStyle = 'orange'
     // gCtx.fill()
 }
 
-function drawText(text, gTxtPos, place, font, gCtx = gCtx) {
-    // gCtx.beginPath()
+function drawText(text, gTxtPos, place, font, line, gCtx = gCtx) {
+    gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = gStrokeStyle
-    gCtx.fillStyle = getMemeValue('color') || 'white'
-    gCtx.font = `${getMemeValue('size')}px ${font}`
+    gCtx.fillStyle = getMemeValue('color', line) || 'white'
+    gCtx.font = `${getMemeValue('size', line)}px ${font}`
     gCtx.textAlign = place
     gCtx.textBaseline = 'middle'
 
@@ -63,21 +63,22 @@ function drawText(text, gTxtPos, place, font, gCtx = gCtx) {
 function drawMeme(meme, gCtx = gCtx, img = getImg(), color = undefined) {
     drawImg(img, gCtx)
     for (let index = 0; index < meme.lines.length; index++) {
-        let strokeColor = color || meme.lines[index].rectStroke
+        if (meme.lines[index].isDeleted) continue
 
+        let strokeColor = color || meme.lines[index].rectStroke
 
         switch (index) {
             case 0:
-                drawRect(10, gRectHeightUp, strokeColor, gCtx)
-                drawText(meme.lines[index].txt, gTxtPosUp, meme.lines[index].align, meme.lines[index].font, gCtx)
+                drawRect(10, gRectHeightUp, strokeColor, index, gCtx)
+                drawText(meme.lines[index].txt, gTxtPosUp, meme.lines[index].align, meme.lines[index].font, index, gCtx)
                 break
             case 1:
-                drawRect(10, gRectHeightDown, strokeColor, gCtx)
-                drawText(meme.lines[index].txt, gTxtPosDown, meme.lines[index].align, meme.lines[index].font, gCtx)
+                drawRect(10, gRectHeightDown, strokeColor, index, gCtx)
+                drawText(meme.lines[index].txt, gTxtPosDown, meme.lines[index].align, meme.lines[index].font, index, gCtx)
                 break
             case 2:
-                drawRect(10, gRectHeightCenter, strokeColor, gCtx)
-                drawText(meme.lines[index].txt, gTxtPosCenter, meme.lines[index].align, meme.lines[index].font, gCtx)
+                drawRect(10, gRectHeightCenter, strokeColor, index, gCtx)
+                drawText(meme.lines[index].txt, gTxtPosCenter, meme.lines[index].align, meme.lines[index].font, index, gCtx)
                 break
         }
     }

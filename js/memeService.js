@@ -30,6 +30,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
+            isDeleted: false,
             txt: '',
             size: 40,
             align: 'left',
@@ -77,6 +78,7 @@ function updateMeme(elImg) {
     gMeme.lines.splice(1)
 
     gMeme.lines[0] = {
+        isDeleted: false,
         txt: '',
         size: 40,
         align: 'left',
@@ -104,12 +106,13 @@ function changeFontSize(num) {
     renderMeme()
 }
 
-function getMemeValue(key) {
-    return gMeme.lines[gMeme.selectedLineIdx][key]
+function getMemeValue(key, line = gMeme.selectedLineIdx) {
+    return gMeme.lines[line][key]
 }
 
 function addMemeLine() {
     gMeme.lines[gMeme.lines.length] = {
+        isDeleted: false,
         txt: '',
         size: 40,
         align: 'left',
@@ -120,17 +123,20 @@ function addMemeLine() {
 }
 
 function setLine() {
-
+    
     if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'yellow') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'white'
-
+    
     gMeme.selectedLineIdx += 1
-
+    
+    if (gMeme.lines[gMeme.selectedLineIdx].isDeleted) gMeme.selectedLineIdx += 1
+    
     if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
 
-    if (gMeme.lines[gMeme.selectedLineIdx].rectStroke == 'rgba(255, 255, 255, 0)') {
-        gMeme.selectedLineIdx = gMeme.selectedLineIdx === gMeme.lines.length - 1 ? 0 : gMeme.selectedLineIdx + 1
-        setLine()
-    }
+
+    // if (gMeme.lines[gMeme.selectedLineIdx].rectStroke == 'rgba(255, 255, 255, 0)') {
+    //     gMeme.selectedLineIdx = gMeme.selectedLineIdx === gMeme.lines.length - 1 ? 0 : gMeme.selectedLineIdx + 1
+    //     // setLine()
+    // }
 
     if (gMeme.lines[gMeme.selectedLineIdx].rectStroke === 'white') gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'yellow'
 }
@@ -141,13 +147,20 @@ function setLine() {
 
 
 function deleteMemeLine() {
-    gMeme.lines[gMeme.selectedLineIdx].txt = ''
-    gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'rgba(255, 255, 255, 0)'
+    // gMeme.lines[gMeme.selectedLineIdx].txt = ''
+    // gMeme.lines[gMeme.selectedLineIdx].rectStroke = 'rgba(255, 255, 255, 0)'
+    // gMeme.lines.splice(gMeme.selectedLineIdx, 1)
 
-    setLine()
+    gMeme.lines[gMeme.selectedLineIdx].isDeleted = true
+
+    // setLine()
 }
 
 function setFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font
     renderMeme()
+}
+
+function setMeme(meme) {
+    gMeme = meme
 }
